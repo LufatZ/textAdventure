@@ -1,9 +1,8 @@
 import entities.Player
-import items.Item
 import world.World
 
 fun main() {
-    val player: Player = Player()
+    val player: Player = Player.getInstance()
     val feld: World = World()
 
     feld.spawnPlayer()
@@ -30,8 +29,8 @@ fun main() {
         feld.interact()
         println("Do you want to use an item?")
         input = readln().filter { it.isLetter() }.uppercase()
-        if (input[0] == 'J'){
-            player.useItem()
+        if (input[0] == 'J'||input[0] == 'Y'){
+            player.useItem(player)
         }
     }
 }

@@ -1,4 +1,4 @@
-package event
+package world.event
 
 import entities.Entity
 import entities.Player
@@ -6,7 +6,7 @@ import entities.Player
 class Fight {
     fun fight(player: Player, entity: Entity){
         var fighter = (0..1).random()
-        println("fight is beginning $player vs $entity")
+        println("fight beginns: ${player.name} vs ${entity.name}")
         while (!player.isDead()&&!entity.isDead()) {
             if (fighter == 0) {
                 entity.receiveDamage(player.dealDamage())
@@ -15,7 +15,7 @@ class Fight {
             }
             fighter++
             fighter%=2
-            println("remaining Health: \n$player    ${player.health}\n$entity    ${entity.health}")
+            println("remaining Health: \n${player.name}    ${player.health}\n${entity.name}    ${entity.health}")
         }
         if (player.isDead()){
             player.death()

@@ -1,4 +1,4 @@
 package entities
 
-class Ork(health: Int) : Entity(health) {
+class Ork(health: Double,name:String="Ork" ) : Entity(health,name) {
 }

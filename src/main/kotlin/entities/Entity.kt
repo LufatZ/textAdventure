@@ -1,11 +1,11 @@
 package entities
 
-open class Entity(var health:Int = 10, val damage: Int = 1){
-    fun receiveDamage(dealDamage: Int) {
+open class Entity(var health:Double = 10.0,val name:String, var damage: Double = 1.0){
+    fun receiveDamage(dealDamage: Double) {
         //TODO
         health -= dealDamage
     }
-    fun dealDamage():Int{
+    fun dealDamage():Double{
         //TODO
         return damage
     }
