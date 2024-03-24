@@ -14,7 +14,7 @@ import kotlin.random.Random
 class WorldFeld() {
     val items = mutableListOf<Item>()
     val entity = mutableListOf<Entity>()
-    val player = Player.getInstance()
+    val player = Player
 
     init {
         if (Random.nextInt(0,100) > 80){

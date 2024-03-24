@@ -3,20 +3,13 @@ package entities
 import items.Item
 import kotlin.system.exitProcess
 
-class Player(name: String, health:Double = 100.0) : Entity(health, name) {
-    companion object {
-        private val instance: Player = Player(setPlayerName())
+object Player : Entity(100.0, run {
+    println("What's your name?")
+    readln()
+}) {
 
-        private fun setPlayerName(): String {
-            println("What's your name?")
-            return readln()
-        }
 
-        fun getInstance(): Player {
-            return instance
-        }
-    }
-    var inventory: MutableList<Item> = mutableListOf()
+    private var inventory: MutableList<Item> = mutableListOf()
     fun death() {
         val message = listOf(
             "You really stepped in it this time, didn't you? Better luck on your next attempt!",
@@ -30,15 +23,14 @@ class Player(name: String, health:Double = 100.0) : Entity(health, name) {
         println(message[number])
         exitProcess(1)
     }
-    fun showInventory(player: Player): String {
-        inventory = player.inventory
+    fun showInventory(): String {
         val inventoryString = buildString {
             appendLine("\nINVENTORY")
             if (inventory.isNotEmpty()) {
                 for ((index, item) in inventory.withIndex()) {
                     appendLine("    %-3s   %s".format(index, item.name))
                 }
-                appendLine("wich item do you want to use? ->  ${player.inventory.indices}")
+                appendLine("wich item do you want to use? ->  ${inventory.indices}")
             } else {
                 appendLine("Your inventory is empty.\n press any key to exit inventory.")
             }
@@ -52,14 +44,14 @@ class Player(name: String, health:Double = 100.0) : Entity(health, name) {
     private fun removeItem(i: Item) {
         //TODO
     }
-    fun useItem(player: Player) {
-        println(showInventory(this))
+    fun selectAnduseItem() {
+        println(showInventory())
         try {
             val number = readln().toInt()
-            if (number in 0..player.inventory.size){
-                val item:Item = player.inventory[number]
+            if (number in 0..inventory.size){
+                val item:Item = inventory[number]
                 item.use(this)
-                player.inventory.remove(item)
+                inventory.remove(item)
             }
         }catch (e: Exception){
             println("Error: There is no item!")

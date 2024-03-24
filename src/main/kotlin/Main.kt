@@ -2,8 +2,8 @@ import entities.Player
 import world.World
 
 fun main() {
-    val player: Player = Player.getInstance()
-    val feld: World = World()
+    val player = Player
+    val feld = World()
 
     feld.spawnPlayer()
     while(!player.isDead()){
@@ -30,7 +30,7 @@ fun main() {
         println("Do you want to use an item?")
         input = readln().filter { it.isLetter() }.uppercase()
         if (input[0] == 'J'||input[0] == 'Y'){
-            player.useItem(player)
+            player.selectAnduseItem()
         }
     }
 }
